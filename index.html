@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>PokeApi</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                font-family: Arial, sans-serif;
+            }
+
+            header {
+                background-color: #ef5350;
+                height: 20vh;
+                text-align: center;
+            }
+
+            #img_header {
+                max-width: 100%;
+                height: 14vh;
+                margin-top: 3vh;
+            }
+
+            main {
+                min-height: 65vh;
+            }
+
+            footer {
+                height: 15vh;
+                background-color: #0a0a0a;
+                color: #ffffff;
+                text-align: center;
+            }
+
+            .p_footer {
+                padding-top: 4vh;
+                font-size: 1.2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="pokemon.png" id="img_header" />
+        </header>
+        <main id="main"></main>
+        <footer>
+            <p class="p_footer">Creado por la comunidad del DSC ITSOEH</p>
+        </footer>
+    </body>
+    <script>
+        let main = document.getElementById('main');
+
+        fetch('https://pokeapi.co/api/v2/pokemon')
+            .then((respuesta) => respuesta.json())
+            .then((respuesta) => {
+                let pokemones = respuesta.results;
+                for (let i = 0; i < 20; i++) {
+                    fetch(pokemones[i].url)
+                        .then((respuesta_p) => respuesta_p.json())
+                        .then((respuesta_p) => {
+                            console.log(respuesta_p);
+                        });
+                }
+            });
+    </script>
+</html>
